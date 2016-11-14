@@ -1,0 +1,13 @@
+{
+  "name": "micbar/kulturdesign_blueprint",
+  "description": "KulturDesign Blueprint base Theme",
+  "type": "drupal-theme",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "micbar",
+      "email": "michael.barz@zeitgestalten.eu"
+    }
+  ]
+}
