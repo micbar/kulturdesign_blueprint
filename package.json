@@ -1,0 +1,35 @@
+{
+  "name": "kulturdesign_blueprint",
+  "version": "8.0.0",
+  "description": "KulturDesign Blueprint",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "find node_modules/ -name '*.info' -type f -delete && find node_modules/bootstrap/scss/*.scss  -type f -exec sed -i '' 's/\\.active/\\.is-active/g' {} + && find node_modules/bootstrap/scss/**/*.scss  -type f -exec sed -i '' 's/\\.active/\\.is-active/g' {} +"
+
+  },
+  "author": "Michael Barz <michael.barz@zeitgestalten.eu>",
+  "license": "GPL",
+  "devDependencies": {
+    "del": "^2.0.2",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-sass-lint": "^1.1.1",
+    "gulp-shell": "^0.5.1",
+    "run-sequence": "^1.1.5",
+    "bootstrap": "^4.0.0-alpha.2"
+  },
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.2",
+    "jshint": "^2.9.1",
+    "gulp-jshint": "^2.0.0",
+    "sass-toolkit": "^2.9.0",
+    "susy": "^2.2.12",
+    "breakpoint-sass" : "^2.7.0",
+    "del": "^2.0.2",
+    "gulp-load-plugins": "^1.1.0",
+    "browser-sync" : "^2.11.2"
+  }
+}

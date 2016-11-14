@@ -1,0 +1,22 @@
+@import 'variablesandco';
+
+.full-footer {
+  background: $gray-dark;
+  padding: 1rem;
+}
+
+.full-header {
+  background: $brand-primary;
+}
+
+// Fix for reassigning toolbar state classes by responsive menu module (mmenue).
+.toolbar-tray-open.toolbar-fixed.toolbar-vertical.mm-page {
+  .layout-wrapper {
+    margin-left: 240px;
+    margin-left: 15rem;
+  }
+}
+
+header, .messages {
+  margin-bottom: $spacer;
+}

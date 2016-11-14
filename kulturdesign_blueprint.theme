@@ -1,0 +1,295 @@
+<?php
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+use Drupal\Component\Serialization\Json;
+
+/**
+ * @file
+ * Functions to support theming in the kulturdesign_blueprint theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function kulturdesign_blueprint_preprocess_html(array &$variables) {
+  /* Add class to html tag */
+  $variables['html_attributes']->addClass('no-js');
+
+  // Don't display the site name twice on the front page (and potentially others)
+  if (isset($variables['head_title_array']['title']) && isset($variables['head_title_array']['name']) && ($variables['head_title_array']['title'] == $variables['head_title_array']['name'])) {
+    $variables['head_title'] = $variables['head_title_array']['name'];
+  }
+  // Add information about the number of sidebars.
+  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
+    $variables['attributes']['class'][] = 'layout-two-sidebars';
+  }
+  elseif (!empty($variables['page']['sidebar_first'])) {
+    $variables['attributes']['class'][] = 'layout-one-sidebar';
+    $variables['attributes']['class'][] = 'layout-sidebar-first';
+  }
+  elseif (!empty($variables['page']['sidebar_second'])) {
+    $variables['attributes']['class'][] = 'layout-one-sidebar';
+    $variables['attributes']['class'][] = 'layout-sidebar-second';
+  }
+  else {
+    $variables['attributes']['class'][] = 'layout-no-sidebars';
+  }
+
+  if (!empty($variables['page']['banner'])) {
+    $variables['attributes']['class'][] = 'has-banner';
+  }
+}
+/**
+ * Implements hook_link_alter().
+ */
+function kulturdesign_blueprint_link_alter(&$variables) {
+  var_dump($variables);
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function kulturdesign_blueprint_page_attachments_alter(array &$page) {
+  // Tell IE to use latest rendering engine (not to use compatibility mode).
+  $ie_edge = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => [
+      'http-equiv' => 'X-UA-Compatible',
+      'content' => 'IE=edge',
+    ],
+  ];
+  $page['#attached']['html_head'][] = [$ie_edge, 'ie_edge'];
+}
+
+/**
+ * Implements hook_preprocess_page() for page.html.twig.
+ */
+function kulturdesign_blueprint_preprocess_page(array &$variables) {
+
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function kulturdesign_blueprint_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+}
+
+/**
+ * Implements hook_theme_suggestions_form_element_alter().
+ */
+function kulturdesign_blueprint_theme_suggestions_input_alter(array &$suggestions, array $variables) {
+  //kint($variables);
+ // $suggestions[] = "input__" . $variables['element']['#type'];
+}
+
+/**
+ * Implements hook_theme_suggestions_node_alter().
+ */
+function kulturdesign_blueprint_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  /*$node = $variables['elements']['#node'];
+
+  if ($variables['elements']['#view_mode'] == "full") {
+
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for Block document templates.
+ */
+function kulturdesign_blueprint_preprocess_block(array &$variables) {
+
+}
+
+/**
+ * Implements hook_theme_suggestions_field_alter().
+ */
+function kulturdesign_blueprint_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  /*$element = $variables['element'];
+  $suggestions[] = 'field__' . $element['#view_mode'];
+  $suggestions[] = 'field__' . $element['#view_mode'] . '__' . $element['#field_name'];*/
+}
+
+/**
+ * Implements hook_theme_suggestions_field_alter().
+ */
+function kulturdesign_blueprint_theme_suggestions_fieldset_alter(array &$suggestions, array $variables) {
+  /*$element = $variables['element'];
+  if (isset($element['#attributes']['class']) && in_array('form-composite',
+  $element['#attributes']['class'])) {
+    $suggestions[] = 'fieldset__form_composite';
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function kulturdesign_blueprint_preprocess_node(array &$variables) {
+  // Default to turning off byline/submitted.
+  //$variables['display_submitted'] = FALSE;
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_alter().
+ */
+function kulturdesign_blueprint_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_form().
+ */
+function kulturdesign_blueprint_preprocess_form(array &$variables) {
+  //$variables['attributes']['novalidate'] = 'novalidate';
+}
+
+/**
+ * Implements hook_preprocess_select().
+ */
+function kulturdesign_blueprint_preprocess_select(array &$variables) {
+  //$variables['attributes']['class'][] = 'select-chosen';
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function kulturdesign_blueprint_preprocess_field(array &$variables, $hook) {
+  /*switch ($variables['element']['#field_name']) {
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_details().
+ */
+function kulturdesign_blueprint_preprocess_details(array &$variables) {
+  /*$variables['attributes']['class'][] = 'details';
+  $variables['summary_attributes']['class'] = 'summary';*/
+}
+
+/**
+ * Implements hook_theme_suggestions_details_alter().
+ */
+function kulturdesign_blueprint_theme_suggestions_details_alter(array &$suggestions, array $variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function kulturdesign_blueprint_preprocess_menu_local_task(array &$variables) {
+  //$variables['element']['#link']['url']->setOption('attributes', ['class'=>'nav-link']);
+}
+
+/**
+ * Implements hook_preprocess_menu_local_tasks().
+ */
+function kulturdesign_blueprint_preprocess_menu_local_tasks(array &$variables) {
+
+  $array_numeric_secondary = Element::children($variables['secondary'], TRUE);
+  $active_data_attribute = FALSE;
+  foreach($array_numeric_secondary as $key2 => $value2) {
+    $options = $variables['secondary'][$array_numeric_secondary[$key2]]['#link']['url']->GetOptions();
+    $options += array('attributes' => array('class' => (array('btn', 'btn-primary-outline'))));
+    $variables['secondary'][$array_numeric_secondary[$key2]]['#link']['url']->setOptions($options);
+    $get_active_data_attribute = _kulturdesign_blueprint_get_active_link_attribute($variables['secondary'][$array_numeric_secondary[$key2]]);
+    if ($get_active_data_attribute) {
+      $active_data_attribute = $get_active_data_attribute;
+    }
+  }
+
+  $array_numeric = Element::children($variables['primary'], TRUE);
+
+  if (count($array_numeric) > 3) {
+
+    $primarydropdown = array();
+
+
+    foreach ($array_numeric as $key => $item) {
+      if ($key >= 2) {
+        $primarydropdown[$array_numeric[$key]] = $variables['primary'][$array_numeric[$key]];
+        $primarydropdown[$array_numeric[$key]]['#attributes'] = new Attribute();
+        $primarydropdown[$array_numeric[$key]]['#attributes']->addClass('dropdown-listitem');
+        $primarydropdown[$array_numeric[$key]]['#link']['url']->setOption('attributes', ['class' => 'dropdown-item']);
+        $primarydropdown[$array_numeric[$key]]['#link']['#primary'] = TRUE;
+
+        $get_active_data_attribute = _kulturdesign_blueprint_get_active_link_attribute($primarydropdown[$array_numeric[$key]]);
+        if ($get_active_data_attribute && !$active_data_attribute) {
+          $active_data_attribute = $get_active_data_attribute;
+        }
+
+        if ($key != 2) {
+          unset($variables['primary'][$array_numeric[$key]]);
+        }
+      }
+      else {
+        $variables['primary'][$array_numeric[$key]]['#attributes'] = new Attribute();
+        $variables['primary'][$array_numeric[$key]]['#attributes']->addClass('nav-item');
+        $variables['primary'][$array_numeric[$key]]['#link']['url']->setOption('attributes', ['class' => 'nav-link']);
+        $variables['primary'][$array_numeric[$key]]['#link']['#primary'] = TRUE;
+      }
+    }
+    $variables['primary'][$array_numeric[2]]['#attributes'] = new Attribute();
+    $variables['primary'][$array_numeric[2]]['#attributes']->addClass('dropdown');
+    $variables['primary'][$array_numeric[2]]['#attributes']->addClass('nav-item');
+    $variables['primary'][$array_numeric[2]]['#link']['title'] = new TranslatableMarkup('More');
+
+    $link_options = array(
+      'attributes' => array(
+        'class' => array(
+          'nav-link',
+          'dropdown-toggle',
+        ),
+        'data-toggle' => 'dropdown',
+        'role' => 'button',
+        'aria-haspopup' => 'true',
+        'aria-expanded' => 'false',
+      ),
+      'fragment' => TRUE,
+    );
+
+    if ($active_data_attribute) {
+      $link_options['attributes'] += $active_data_attribute;
+    }
+
+    $variables['primary'][$array_numeric[2]]['#link']['url'] = Url::fromUri('internal:#', $link_options);
+    $variables['primary'][$array_numeric[2]]['#link']['#primary'] = TRUE;
+    $variables['primary'][$array_numeric[2]]['#link']['#primarydropdown'] = $primarydropdown;
+    $variables['primary'][$array_numeric[2]]['#link']['#dropdowntoggle'] = TRUE;
+  }
+}
+
+function _kulturdesign_blueprint_get_active_link_attribute($element) {
+  if ($element['#active']) {
+    $urlobject = $element['#link']['url'];
+    $options = $urlobject->getOptions();
+    $active = array();
+
+    // Set the "active" class if the 'set_active_class' option is not empty.
+    if (!$urlobject->isExternal()) {
+      // Add a "data-drupal-link-query" attribute to let the
+      // drupal.active-link library know the query in a standardized manner.
+      if (!empty($options['query'])) {
+        $query = $options['query'];
+        ksort($query);
+        $active['attributes']['data-drupal-link-query'] = Json::encode($query);
+      }
+
+      // Add a "data-drupal-link-system-path" attribute to let the
+      // drupal.active-link library know the path in a standardized manner.
+      if ($urlobject->isRouted() && !isset($options['attributes']['data-drupal-link-system-path'])) {
+        // @todo System path is deprecated - use the route name and parameters.
+        $system_path = $urlobject->getInternalPath();
+        // Special case for the front page.
+        $active['attributes']['data-drupal-link-system-path'] = $system_path == '' ? '<front>' : $system_path;
+      }
+    }
+    return ($active['attributes']);
+  }
+  else {
+    return FALSE;
+  }
+}

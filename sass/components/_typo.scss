@@ -1,0 +1,17 @@
+@import 'variablesandco';
+@import '../../node_modules/bootstrap/scss/type';
+
+.node__submitted {
+  font-size: .8rem;
+  margin-bottom: $spacer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+em {
+  color: $brand-primary;
+  font-style: normal;
+  letter-spacing: 1px;
+}

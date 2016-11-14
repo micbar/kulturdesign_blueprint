@@ -1,0 +1,13 @@
+basic-styling:
+  css:
+    theme:
+      css/style.css: { media: all }
+      css/print.css: { media: print }
+  js:
+    js/script.js: {}
+
+bootstrap-components:
+  js:
+    node_modules/bootstrap/dist/js/bootstrap.min.js: {}
+  dependencies:
+      - core/jquery

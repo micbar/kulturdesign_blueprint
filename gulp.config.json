@@ -1,0 +1,6 @@
+{
+  "enable_bs": true,
+  "localhost": "blueprint.local",
+  "debug": true,
+  "caches_disabled": false
+}

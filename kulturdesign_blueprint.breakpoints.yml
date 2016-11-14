@@ -1,0 +1,30 @@
+kulturdesign_blueprint.xsmall:
+  label: xsmall
+  mediaQuery: 'all and (min-width: 0)'
+  weight: 1
+  multipliers:
+    - 1x
+kulturdesign_blueprint.small:
+  label: small
+  mediaQuery: 'all and (min-width: 544px)'
+  weight: 2
+  multipliers:
+    - 1x
+kulturdesign_blueprint.medium:
+  label: medium
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 3
+  multipliers:
+    - 1x
+kulturdesign_blueprint.large:
+  label: large
+  mediaQuery: 'all and (min-width: 992px)'
+  weight: 4
+  multipliers:
+    - 1x
+kulturdesign_blueprint.xlarge:
+  label: xlarge
+  mediaQuery: 'all and (min-width: 1200px)'
+  weight: 5
+  multipliers:
+    - 1x

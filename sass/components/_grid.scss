@@ -1,0 +1,177 @@
+@import 'variablesandco';
+@import 'variablesoverrides';
+@import '../../node_modules/susy/sass/susy';
+
+$susy: (
+  global-box-sizing: border-box,
+);
+
+$mobile: (
+  columns: 4,
+  gutters: 1 / 4,
+  math: fluid,
+  output: float,
+  gutter-position: inside
+);
+
+$sm: (
+  columns: 12,
+  gutters: 1 / 4,
+  math: fluid,
+  output: float,
+  gutter-position: inside
+);
+
+$md: (
+  columns: 12,
+  gutters: 1 / 4,
+  math: fluid,
+  output: float,
+  gutter-position: inside
+);
+
+$lg: (
+  columns: 12,
+  gutters: 1 / 4,
+  math: fluid,
+  output: float,
+  gutter-position: inside
+);
+
+$xl: (
+  columns: 12,
+  gutters: 1 / 4,
+  math: fluid,
+  output: float,
+  gutter-position: inside
+);
+
+.layout-page,
+.layout-header,
+.layout-footer {
+  @include media-breakpoint-up(xs) {
+    @include layout($mobile);
+    @include container;
+    padding-left:  ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
+  }
+  @include media-breakpoint-up(sm) {
+    @include layout($sm);
+    @include container(map-get($container-max-widths, sm));
+  }
+  @include media-breakpoint-up(md) {
+    @include layout($md);
+    @include container(map-get($container-max-widths, md));
+  }
+  @include media-breakpoint-up(lg) {
+    @include layout($lg);
+    @include container(map-get($container-max-widths, lg));
+  }
+  @include media-breakpoint-up(xl) {
+    @include layout($xl);
+    @include container(map-get($container-max-widths, xl));
+  }
+}
+
+.toolbar-tray-open.toolbar-fixed.toolbar-vertical {
+  .layout-page,
+  .layout-header,
+  .layout-footer {
+    @include media-breakpoint-up(sm) {
+      @include layout($mobile);
+      @include container(map-get($container-max-widths, xs));
+    }
+    @include media-breakpoint-up(md) {
+      @include layout($sm);
+      @include container(map-get($container-max-widths, sm));
+    }
+  }
+
+  .layout-content,
+  .layout-sidebar-first,
+  .layout-sidebar-second {
+    @include span(full);
+  }
+}
+
+.layout-one-sidebar {
+  .layout-sidebar-first {
+    @include media-breakpoint-up(xs) {
+      @include span(full);
+    }
+    @include media-breakpoint-up(md) {
+      @include span(4 of 12);
+    }
+  }
+
+  &.layout-sidebar-first {
+    .layout-content {
+      @include media-breakpoint-up(xs) {
+        @include span(full);
+      }
+      @include media-breakpoint-up(md) {
+        @include span(8 at 5 of 12);
+      }
+    }
+  }
+
+  .layout-sidebar-second {
+    @include media-breakpoint-up(xs) {
+      @include span(full);
+    }
+    @include media-breakpoint-up(md) {
+      @include span(4 at 9 of 12);
+    }
+  }
+
+  &.layout-sidebar-second {
+    .layout-content {
+      @include media-breakpoint-up(xs) {
+        @include span(full);
+      }
+      @include media-breakpoint-up(md) {
+        @include span(8 of 12);
+      }
+    }
+  }
+}
+
+.layout-two-sidebars {
+  .layout-sidebar-first {
+    @include media-breakpoint-up(xs) {
+      @include span(full);
+    }
+    @include media-breakpoint-up(md) {
+      @include span(3 of 12);
+    }
+    @include media-breakpoint-up(lg) {
+      @include span(3 of 12);
+      @include pull(9);
+    }
+  }
+
+  .layout-sidebar-second {
+    @include media-breakpoint-up(xs) {
+      @include span(full);
+    }
+    @include media-breakpoint-up(md) {
+      @include span(3 of 12);
+    }
+    @include media-breakpoint-up(lg) {
+      @include span(3 at 10 of 12);
+    }
+  }
+
+  .layout-content {
+    @include media-breakpoint-up(xs) {
+      @include span(full);
+    }
+    @include media-breakpoint-up(md) {
+      @include span(9 at 4 of 12);
+    }
+    @include media-breakpoint-up(lg) {
+      @include span(6 at 4 of 12);
+      @include push(3);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import 'variablesandco';
+@import '../../node_modules/bootstrap/scss/nav';
+@import '../../node_modules/bootstrap/scss/dropdown';
+
+.nav-item {
+  .nav-link {
+    line-height: 1;
+  }
+}

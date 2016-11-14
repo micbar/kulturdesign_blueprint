@@ -1,0 +1,10 @@
+@import 'variablesandco';
+@import '../../node_modules/bootstrap/scss/buttons';
+@import '../../node_modules/bootstrap/scss/button-group';
+
+.tabs--secondary {
+  list-style-type: none;
+  margin-top: $spacer;
+  margin-left: 0;
+  padding: 0;
+}

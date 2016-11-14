@@ -1,0 +1,26 @@
+name: KulturDesign Blueprint
+type: theme
+description: KulturDesign Blueprint theme inspired by Bootstrap 4.0
+package: KulturDesign
+core: 8.x
+libraries:
+  - kulturdesign_blueprint/basic-styling
+  - kulturdesign_blueprint/bootstrap-components
+  - core/modernizr
+stylesheets-remove:
+  - core/assets/vendor/normalize-css/normalize.css
+  - @classy/css/components/tabs.css
+base theme: classy
+# Using Classy as a base theme https://www.drupal.org/theme-guide/8/classy
+
+regions:
+  headerfull: Header Full Width
+  header: Header
+  banner: Banner
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: First Sidebar
+  sidebar_second: Second Sidebar
+  subnavigation: Sub Navigation
+  footer: Footer
