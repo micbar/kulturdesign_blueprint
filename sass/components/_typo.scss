@@ -6,7 +6,12 @@
   margin-bottom: $spacer;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 400;
 }
 
@@ -14,4 +19,26 @@ em {
   color: $brand-primary;
   font-style: normal;
   letter-spacing: 1px;
+}
+
+ul {
+  li {
+    margin-bottom: .3rem;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    ul {
+      li {
+        &:last-child {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.tips {
+  padding-left: 2 rem;
 }

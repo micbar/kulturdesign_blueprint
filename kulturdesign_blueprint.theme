@@ -178,10 +178,13 @@ function kulturdesign_blueprint_theme_suggestions_details_alter(array &$suggesti
 }
 
 /**
- * Implements hook_preprocess_menu_local_task().
+ * Implements hook_preprocess_confirm_form().
  */
-function kulturdesign_blueprint_preprocess_menu_local_task(array &$variables) {
-  //$variables['element']['#link']['url']->setOption('attributes', ['class'=>'nav-link']);
+function kulturdesign_blueprint_preprocess_confirm_form(array &$variables) {
+  if (isset($variables['form']['actions']['cancel'])) {
+    $variables['form']['actions']['cancel']['#attributes'] = array_merge_recursive(
+      $variables['form']['actions']['cancel']['#attributes'], array('class' => array('btn', 'btn-outline-danger')));
+  }
 }
 
 /**
@@ -193,7 +196,7 @@ function kulturdesign_blueprint_preprocess_menu_local_tasks(array &$variables) {
   $active_data_attribute = FALSE;
   foreach($array_numeric_secondary as $key2 => $value2) {
     $options = $variables['secondary'][$array_numeric_secondary[$key2]]['#link']['url']->GetOptions();
-    $options += array('attributes' => array('class' => (array('btn', 'btn-primary-outline'))));
+    $options += array('attributes' => array('class' => (array('btn', 'btn-outline-primary'))));
     $variables['secondary'][$array_numeric_secondary[$key2]]['#link']['url']->setOptions($options);
     $get_active_data_attribute = _kulturdesign_blueprint_get_active_link_attribute($variables['secondary'][$array_numeric_secondary[$key2]]);
     if ($get_active_data_attribute) {

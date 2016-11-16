@@ -1,7 +1,12 @@
 @media print {
   *,
   *::before,
-  *::after {
+  *::after,
+  *::first-letter,
+  p::first-line,
+  div::first-line,
+  blockquote::first-line,
+  li::first-line {
     text-shadow: none !important;
     box-shadow: none !important; }
   a,
@@ -9,6 +14,8 @@
     text-decoration: underline; }
   abbr[title]::after {
     content: " (" attr(title) ")"; }
+  pre {
+    white-space: pre-wrap !important; }
   pre,
   blockquote {
     border: 1px solid #999;
@@ -18,8 +25,6 @@
   tr,
   img {
     page-break-inside: avoid; }
-  img {
-    max-width: 100% !important; }
   p,
   h2,
   h3 {
@@ -33,7 +38,7 @@
   .btn > .caret,
   .dropup > .btn > .caret {
     border-top-color: #000 !important; }
-  .label {
+  .tag {
     border: 1px solid #000; }
   .table {
     border-collapse: collapse !important; }

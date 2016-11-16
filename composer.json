@@ -2,7 +2,8 @@
   "name": "micbar/kulturdesign_blueprint",
   "description": "KulturDesign Blueprint base Theme",
   "type": "drupal-theme",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "license": "MIT",
   "authors": [
     {
